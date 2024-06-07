@@ -1,0 +1,50 @@
+.category {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid #262626;
+    background-color: #1A1A1A;
+    height: 100%;
+    padding: 20px;
+}
+
+.category:hover {
+    background-color: #1E1E1E;
+    border: 1px solid #1A1A1E;
+}
+
+
+.icon {
+
+    padding: 20px;
+
+
+}
+
+
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 150%;
+    text-align: center;
+    color: #ededed;
+
+}
+
+
+@media screen and (max-width: 1020px) {
+
+    .title {
+        font-size: 16px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .title {
+        font-size: 14px;
+    }
+
+}

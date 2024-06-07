@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  line-height: 150%;
+  /* 27px */
+
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: #ededed;
+  background: #1e1e1e;
+
+}
+
+main {
+  background-color: #141414;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.button {
+  display: flex;
+  padding: 18px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+}
+
+.abstract-bg {
+  background-image: url("/abstract_CTA_left.png"), url("/abstract_CTA_right.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom left, bottom right;
+}
+
+@media screen and (max-width: 728px) {
+  .abstract-bg {
+    background-image: url("/abstract_CTA_left.png");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+  }
+}
+
+.swiper-thumbs .swiper-wrapper {
+  padding: 10px;
+  max-height: 134px;
+}
+
+.swiper-thumbs .swiper-slide {
+  opacity: 0.5;
+}
+
+.swiper-thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+#contactForm input:not([type='checkbox']),
+#contactForm textarea,
+#contactForm select {
+  width: 100%;
+  background-color: #1A1A1A;
+  padding: 20px;
+  border: 1px solid #262626;
+  border-radius: 8px;
+}
+
+
+input:focus,
+textarea:focus {
+
+  outline: solid 2px #703BF7;
+
+
+}
+
+#contactForm input[type='checkbox'] {
+  height: 24px;
+  width: 24px;
+
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: relative !important;
+}
+
+.swiper-button-disabled svg {
+  color: #999;
+  background-color: #141414;
+}
+
+.swiper-pagination-bullet {
+  margin: 3px !important;
+  border-radius: 0 !important;
+  width: 12px !important;
+  height: 3px !important;
+  background: #4D4D4D !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #703BF7 !important;
+}
