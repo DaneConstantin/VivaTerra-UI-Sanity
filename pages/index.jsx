@@ -1,7 +1,7 @@
-import Hero from '@/components/home/hero';
+import Hero from '../components/home/hero';
 import Layout from '../components/Layout';
-import Services from '@/components/home/services';
-import SectionHeader from '@/components/SectionHeader';
+import Services from '../components/home/services';
+import SectionHeader from '../components/SectionHeader';
 import PropertiesSlider from '../components/home/slider/PropertiesSlider';
 import FAQSlider from '../components/home/faq/FAQ';
 
