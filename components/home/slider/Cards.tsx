@@ -9,14 +9,13 @@ const urlFor = (source: any) =>
 
 export default function Cards({ propertiesListed }: { propertiesListed: SanityDocument[] }) {
 
-  console.log(propertiesListed, "hereaici")
   return (
 
     <section className="container px-8 md:px-0">
 
       <div className="grid gap-6 2xl:gap-8 md:grid-cols-2 xl:grid-cols-3 justify-center">
         {propertiesListed &&
-          propertiesListed.map((property) => {
+          propertiesListed.map((property, index) => {
 
 
 
@@ -28,7 +27,7 @@ export default function Cards({ propertiesListed }: { propertiesListed: SanityDo
             const image = imageUrl !== null ? imageUrl : localImageUrl;
 
             return (
-              <li key={property.id} className="list-none rounded-xl border border-[#262626] min-w-[358px] max-w-[512px] ">
+              <li key={index} className="list-none rounded-xl border border-[#262626] min-w-[358px] max-w-[512px] ">
 
                 <SingleCard
                   image={image}

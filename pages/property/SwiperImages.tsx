@@ -1,7 +1,8 @@
 'client'
+import { SanityDocument } from 'next-sanity';
 import { Thumbs, Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useState } from 'react';
+import { Key, useState } from 'react';
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 // Import Swiper styles
 import 'swiper/css';
@@ -10,12 +11,21 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/thumbs';
 import Image from 'next/image';
+import imageUrlBuilder from "@sanity/image-url";
 
-const SwiperImages = ({ photo }) => {
-    const [thumbsSwiper, setThumbsSwiper] = useState(0);
-    const photosToMap = photo && photo.data ? photo.data : [];
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? 'defaultProjectId';
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'defaultDataset';
+const urlFor = (source: any) =>
+    imageUrlBuilder({ projectId, dataset }).image(source)
+
+
+export default function SwiperImages({ photo }) {
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const imageUrl = urlFor(photo[0]).quality(90).url();
+
+    console.log("photo here", imageUrl)
     return (
-        <>{photosToMap ? (
+        <>{imageUrl ? (
             <>
                 <div className="flex w-full md:max-w-[300px] bg-[#141414] rounded-full border border-[#262626] p-2 mx-auto items-center">
                     <button className="prev bg-[#1A1A1A] rounded-full"><GoArrowLeft className="text-5xl lg:text-6xl border border-[#262626] rounded-full p-2 lg:p-3" /></button>
@@ -44,14 +54,14 @@ const SwiperImages = ({ photo }) => {
                     }}
                     className="flex w-full h-full min-h-[250px] my-6"
                 >
-                    {photosToMap.map((property) => {
+                    {photo.map((property: { id: Key; }) => {
 
                         return (
                             <SwiperSlide key={property.id} >
                                 <div className="relative overflow-hidden aspect-ratio-video w-full min-h-[280px] sm:min-h-[360px] md:min-h-[320px] lg:min-h-[380px] xl:min-h-[480px] 2xl:min-h-[500px]">
                                     <Image
-                                        src={`${property.attributes.url}`}
-                                        alt=""
+                                        src={urlFor(property).quality(90).url()}
+                                        alt="property image"
                                         fill
                                         style={{ objectFit: "cover" }}
                                         className="rounded-lg cursor-pointer"
@@ -83,13 +93,13 @@ const SwiperImages = ({ photo }) => {
                     spaceBetween={10}
                     className="flex w-full bg-[#141414] rounded-lg border border-[#262626]"
                 >
-                    {photosToMap.map((property) => {
+                    {photo.map((property: { id: Key; }) => {
                         return (
                             <SwiperSlide key={property.id}>
                                 <div className="relative overflow-hidden aspect-ratio-video h-[62px] md:h-[94px]">
                                     <Image
-                                        src={`${property.attributes.formats.thumbnail.url}`}
-                                        alt=""
+                                        src={urlFor(property).quality(90).url()}
+                                        alt="property thumb"
                                         fill
                                         style={{ objectFit: "cover" }}
                                         className="rounded-lg cursor-pointer h-full"
@@ -119,4 +129,3 @@ const SwiperImages = ({ photo }) => {
 
     )
 }
-export default SwiperImages;

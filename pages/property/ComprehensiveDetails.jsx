@@ -1,5 +1,6 @@
-import Container from "@/components/Container"
-import SectionHeader from "@/components/SectionHeader"
+
+import SectionHeader from "../../components/SectionHeader"
+import Container from "../../components/Container"
 
 const MiniSection = ({ title, value, annotation }) => {
     return (

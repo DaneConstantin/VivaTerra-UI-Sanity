@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { fetcher } from '../lib/api';
-import useSWR from "swr";
+
 
 const ContactForm = ({ properties }) => {
 
@@ -36,10 +35,6 @@ const ContactForm = ({ properties }) => {
     };
 
 
-    const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/properties?populate=*`, fetcher, {
-        fallbackData: properties
-    })
-
     return (
         <div className="mx-auto">
             <form id="contactForm" onSubmit={handleSubmit} className="space-y-4">
@@ -65,9 +60,9 @@ const ContactForm = ({ properties }) => {
                     <label htmlFor="selectedProperty" className="block py-2 font-semibold lg:text-lg">Selected Property</label>
                     <select id="selectedProperty" value={selectedProperty} onChange={(e) => setSelectedProperty(e.target.value)} className="w-full" required>
                         <option value="" disabled>Select a Property</option>
-                        {data?.data.map(property => (
+                        {/* {data?.data.map(property => (
                             <option key={property.id} value={property.attributes.name}>{property.attributes.name}</option>
-                        ))}
+                        ))} */}
                     </select>
                 </div>
                 <div>
@@ -88,15 +83,3 @@ const ContactForm = ({ properties }) => {
     )
 }
 export default ContactForm;
-
-export async function getStaticProps() {
-    const getProperties = await fetcher(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/properties?populate=*`
-    );
-    return {
-        props: {
-            properties: getProperties,
-        },
-    };
-
-}

@@ -25,7 +25,7 @@ const TopPopup = () => {
                     </div>
                     <div className='relative top-0 w-full left-0 right-0'>
                         <div className="flex justify-between items-center">
-                            <div></div>
+                            <div className=''></div>
                             <p>✨Discover Your Dream Property with VivaTerra. <Link className="underline" href="/properties">Learn More</Link></p>
 
                             <IoClose onClick={handleClose} className='bg-[#262626] rounded-full p-2 text-4xl cursor-pointer' />
