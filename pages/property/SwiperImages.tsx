@@ -21,17 +21,31 @@ const urlFor = (source: any) =>
 
 export default function SwiperImages({ photo }) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const imageUrl = urlFor(photo[0]).quality(90).url();
 
+    if (!photo || photo.length === 0) {
+        return (
+            <SwiperSlide>
+                <div className="relative overflow-hidden aspect-ratio-video w-full min-h-[280px] sm:min-h-[360px] md:min-h-[320px] lg:min-h-[380px] xl:min-h-[480px] 2xl:min-h-[500px]">
+                    <Image
+                        src='https://res.cloudinary.com/dfks8op0a/image/upload/v1708338024/VivaTerra/forSalePlaceholder_lacvd1.png'
+                        alt="placeholder"
+                        fill
+                        style={{ objectFit: "cover" }}
+                        className="rounded-lg cursor-pointer"
+                    />
+                </div>
+            </SwiperSlide>
+        );
+    }
+    else {
+        return (
 
-    return (
-        <>{imageUrl ? (
             <>
                 <div className="flex w-full md:max-w-[300px] bg-[#141414] rounded-full border border-[#262626] p-2 mx-auto items-center">
                     <button className="prev bg-[#1A1A1A] rounded-full"><GoArrowLeft className="text-5xl lg:text-6xl border border-[#262626] rounded-full p-2 lg:p-3" /></button>
                     <div className="flex swiper-custom-pagination w-full justify-center"></div>
                     <button className="next bg-[#1A1A1A] rounded-full"><GoArrowRight className="text-5xl lg:text-6xl border border-[#262626] rounded-full p-2 lg:p-3" /></button>
-                </div >
+                </div>
                 <Swiper
                     modules={[Thumbs, Pagination, Navigation]}
                     thumbs={{ swiper: thumbsSwiper }}
@@ -42,11 +56,9 @@ export default function SwiperImages({ photo }) {
                         nextEl: '.next',
                     }}
                     breakpoints={{
-                        // when window width is >= 768px
                         720: {
                             slidesPerView: 2,
                         },
-
                     }}
                     pagination={{
                         clickable: true,
@@ -54,23 +66,19 @@ export default function SwiperImages({ photo }) {
                     }}
                     className="flex w-full h-full min-h-[250px] my-6"
                 >
-                    {photo.map((property: { id: Key; }) => {
-
-                        return (
-                            <SwiperSlide key={property.id} >
-                                <div className="relative overflow-hidden aspect-ratio-video w-full min-h-[280px] sm:min-h-[360px] md:min-h-[320px] lg:min-h-[380px] xl:min-h-[480px] 2xl:min-h-[500px]">
-                                    <Image
-                                        src={urlFor(property).quality(90).url()}
-                                        alt="property image"
-                                        fill
-                                        style={{ objectFit: "cover" }}
-                                        className="rounded-lg cursor-pointer"
-                                    />
-                                </div>
-                            </SwiperSlide>
-                        )
-                    })}
-
+                    {photo.map((property: { id: Key; }) => (
+                        <SwiperSlide key={property.id}>
+                            <div className="relative overflow-hidden aspect-ratio-video w-full min-h-[280px] sm:min-h-[360px] md:min-h-[320px] lg:min-h-[380px] xl:min-h-[480px] 2xl:min-h-[500px]">
+                                <Image
+                                    src={urlFor(property).quality(90).url()}
+                                    alt="property image"
+                                    fill
+                                    style={{ objectFit: "cover" }}
+                                    className="rounded-lg cursor-pointer"
+                                />
+                            </div>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
 
                 <Swiper
@@ -79,7 +87,6 @@ export default function SwiperImages({ photo }) {
                     onSwiper={setThumbsSwiper}
                     slidesPerView={4}
                     breakpoints={{
-                        // when window width is >= 751px
                         751: {
                             slidesPerView: 5,
                         },
@@ -93,39 +100,22 @@ export default function SwiperImages({ photo }) {
                     spaceBetween={10}
                     className="flex w-full bg-[#141414] rounded-lg border border-[#262626]"
                 >
-                    {photo.map((property: { id: Key; }) => {
-                        return (
-                            <SwiperSlide key={property.id}>
-                                <div className="relative overflow-hidden aspect-ratio-video h-[62px] md:h-[94px]">
-                                    <Image
-                                        src={urlFor(property).quality(90).url()}
-                                        alt="property thumb"
-                                        fill
-                                        style={{ objectFit: "cover" }}
-                                        className="rounded-lg cursor-pointer h-full"
-                                    />
-                                </div>
-
-                            </SwiperSlide>
-                        )
-                    })}
+                    {photo.map((property: { id: Key; }) => (
+                        <SwiperSlide key={property.id}>
+                            <div className="relative overflow-hidden aspect-ratio-video h-[62px] md:h-[94px]">
+                                <Image
+                                    src={urlFor(property).quality(90).url()}
+                                    alt="property thumb"
+                                    fill
+                                    style={{ objectFit: "cover" }}
+                                    className="rounded-lg cursor-pointer h-full"
+                                />
+                            </div>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </>
-        )
-            :
-            <SwiperSlide>
-                <div className="relative overflow-hidden aspect-ratio-video w-full min-h-[280px] sm:min-h-[360px] md:min-h-[320px] lg:min-h-[380px] xl:min-h-[480px] 2xl:min-h-[500px]">
-                    <Image
-                        src='https://res.cloudinary.com/dfks8op0a/image/upload/v1708338024/VivaTerra/forSalePlaceholder_lacvd1.png'
-                        alt=""
-                        fill
-                        style={{ objectFit: "cover" }}
-                        className="rounded-lg cursor-pointer"
-                    />
-                </div>
-            </SwiperSlide>
-        }
-        </>
 
-    )
+        );
+    }
 }
