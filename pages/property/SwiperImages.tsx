@@ -1,5 +1,5 @@
 'client'
-import { SanityDocument } from 'next-sanity';
+
 import { Thumbs, Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Key, useState } from 'react';
@@ -23,7 +23,7 @@ export default function SwiperImages({ photo }) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const imageUrl = urlFor(photo[0]).quality(90).url();
 
-    console.log("photo here", imageUrl)
+
     return (
         <>{imageUrl ? (
             <>

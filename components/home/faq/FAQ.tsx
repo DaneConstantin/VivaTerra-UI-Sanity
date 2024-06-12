@@ -52,7 +52,7 @@ export default function FAQSlider() {
     if (!data || data.length === 0) {
         return <section>No data</section>;
     }
-    console.log(data, "here")
+   
 
     const totalPages = Math.ceil(data.length / pageSize);
     const paginatedData = data.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);

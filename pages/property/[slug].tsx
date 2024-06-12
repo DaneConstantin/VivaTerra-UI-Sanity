@@ -56,7 +56,7 @@ export default function Property({ singleProperty }: { singleProperty: SanityDoc
     if (!singleProperty) {
         return <section>No data</section>;
     }
-    console.log(singleProperty)
+   
     return (
         < Layout >
             <section className="w-full relative">
